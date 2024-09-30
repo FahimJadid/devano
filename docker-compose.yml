@@ -1,0 +1,17 @@
+services:
+  devano:
+    image: postgres
+    restart: always
+    container_name: devano-db
+    ports:
+      - 5435:5432
+    environment:
+      POSTGRES_DB: devano
+      POSTGRES_PASSWORD: devanoPass
+      POSTGRES_USER: postgres
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+
+volumes:
+  postgres:

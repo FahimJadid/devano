@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { room, Room } from "@/db/schema";
 import { getServerSession } from "next-auth";
 import { authConfig } from "@/lib/auth";
+import { revalidatePath } from "next/cache";
 
 export async function createRoomAction(roomData: Omit<Room, "id" | "userId">) {
     const session = await getServerSession(authConfig);
@@ -13,4 +14,6 @@ export async function createRoomAction(roomData: Omit<Room, "id" | "userId">) {
     }
 
     await db.insert(room).values({ ...roomData, userId: session.user.id });
+
+    revalidatePath("/")
 }

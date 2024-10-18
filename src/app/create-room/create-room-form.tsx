@@ -105,10 +105,10 @@ export function CreateRoomForm() {
               <FormItem>
                 <FormLabel>Language</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input {...field} placeholder="typescript, python, tailwind, javascript, react" />
                 </FormControl>
                 <FormDescription>
-                  List the programming languages you are working with.
+                  List the technologies that you're using in these projects so that other collaborators can contribute.
                 </FormDescription>
                 <FormMessage />
               </FormItem>

@@ -1,4 +1,3 @@
-import { db } from "@/db";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Github } from "lucide-react";
@@ -11,8 +10,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Room } from "@/db/schema";
-import { get } from "http";
 import { getRooms } from "@/data-access/rooms";
+import { LanguageList, splitLang } from "@/components/language-list";
 
 function RoomCard({ room }: { room: Room }) {
   return (
@@ -21,16 +20,22 @@ function RoomCard({ room }: { room: Room }) {
         <CardTitle>{room.name}</CardTitle>
         <CardDescription>{room.description}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col gap-4">
+        <LanguageList languages={splitLang(room.language)}/>
+
         {room.githubRepo && (
-          <Link className="flex items-center gap-2" href={room.githubRepo} target="_blank"
-          rel="noopener noreferrer">
+          <Link
+            className="flex items-center gap-2"
+            href={room.githubRepo}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Github /> Github Repo
           </Link>
         )}
       </CardContent>
       <CardFooter>
-       <Button asChild>
+        <Button asChild>
           <Link href={`/rooms/${room.id}`}>Join Room </Link>
         </Button>
       </CardFooter>
